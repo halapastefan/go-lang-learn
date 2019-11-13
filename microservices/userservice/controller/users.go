@@ -48,6 +48,10 @@ func (User) CreateUser(ctx *gin.Context) {
 
 func (User) DeleteUser(ctx *gin.Context) {
 
+	userId := ctx.Param("id")
+	log.Info("Try to delete user with id: ", userId)
+
+	ctx.Status(http.StatusOK)
 }
 
 func (User) UpdateUser(ctx *gin.Context) {

@@ -1,7 +1,10 @@
 package main
 
 import (
-	"./controller"
+	"../controller"
+	srv "../implementaion"
+	"../repository"
+	"../userservice"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -24,6 +27,15 @@ func main() {
 		api.DELETE("/user/:id", c.DeleteUser)
 		api.PUT("/user/:id", c.UpdateUser)
 	}
+
+	repo := repository.NewRepository()
+	// Constructing service
+	var service userservice.Service
+	{
+		service = srv.NewService(repo)
+	}
+
+	fmt.Println("Inicialized service", service)
 
 	err := main.Router.Run(":3300")
 
