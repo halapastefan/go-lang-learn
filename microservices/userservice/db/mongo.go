@@ -29,11 +29,7 @@ func GetClient() *mongo.Client {
 		log.Fatal(err)
 	}
 
-	ctx := context.Background()
-	ctx.Value(passwordKey)
-	ctx.Value(usernameKey)
-
-	err = client.Connect(ctx)
+	err = client.Connect(context.Background())
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-const DB_NAME string = "reactive"
+const DB_NAME string = "golearn"
 
 type repository struct {
 	db mongo.Client
