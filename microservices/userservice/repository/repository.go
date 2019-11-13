@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"../model"
-	"../userservice"
+	"github.com/halapastefan/microservice/userservice"
+	"github.com/halapastefan/microservice/userservice/model"
 )
 
 type Repository struct {

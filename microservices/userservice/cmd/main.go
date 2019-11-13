@@ -1,12 +1,12 @@
 package main
 
 import (
-	"../controller"
-	srv "../implementaion"
-	"../repository"
-	"../userservice"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/halapastefan/microservice/userservice"
+	"github.com/halapastefan/microservice/userservice/controller"
+	srvc "github.com/halapastefan/microservice/userservice/implementaion"
+	"github.com/halapastefan/microservice/userservice/repository"
 )
 
 type Main struct {
@@ -32,7 +32,7 @@ func main() {
 	// Constructing service
 	var service userservice.Service
 	{
-		service = srv.NewService(repo)
+		service = srvc.NewService(repo)
 	}
 
 	fmt.Println("Inicialized service", service)

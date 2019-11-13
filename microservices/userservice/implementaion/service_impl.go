@@ -1,8 +1,8 @@
 package implementaion
 
 import (
-	"../model"
-	usrsrvc "../userservice"
+	usrsrvc "github.com/halapastefan/microservice/userservice"
+	"github.com/halapastefan/microservice/userservice/model"
 )
 
 type service struct {

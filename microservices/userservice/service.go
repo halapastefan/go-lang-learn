@@ -1,8 +1,10 @@
 package userservice
 
-import "../model"
+import (
+	"github.com/halapastefan/microservice/userservice/model"
+)
 
-type Repository interface {
+type Service interface {
 	GetAllUsers() []model.User
 	GetUser(id int) model.User
 	CreateUser(user model.User) model.User

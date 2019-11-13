@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"../model"
 	"github.com/gin-gonic/gin"
+	"github.com/halapastefan/microservice/userservice/model"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 )
