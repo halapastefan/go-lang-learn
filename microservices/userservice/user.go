@@ -1,11 +1,14 @@
 package userservice
 
-import "github.com/halapastefan/microservice/userservice/model"
+type User struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+}
 
 type Repository interface {
-	GetAllUsers() []model.User
-	GetUser(id int) model.User
-	CreateUser(user model.User) model.User
-	DeleteUser(id int) model.User
-	UpdateUser(user model.User, id int) model.User
+	GetAllUsers() []*User
+	GetUser(id int) User
+	CreateUser(user User) User
+	DeleteUser(id int) User
+	UpdateUser(user User, id int) User
 }

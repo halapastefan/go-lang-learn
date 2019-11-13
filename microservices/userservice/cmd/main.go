@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/halapastefan/microservice/userservice"
-	"github.com/halapastefan/microservice/userservice/controller"
+	"github.com/halapastefan/microservice/userservice/db"
 	srvc "github.com/halapastefan/microservice/userservice/implementaion"
 	"github.com/halapastefan/microservice/userservice/repository"
 )
@@ -17,25 +17,22 @@ func main() {
 
 	main := Main{Router: gin.Default()}
 
-	c := controller.User{}
-
-	api := main.Router.Group("/api")
-	{
-		api.GET("/users", c.GetAllUsers)
-		api.GET("/user/:id", c.GetUser)
-		api.POST("/user", c.CreateUser)
-		api.DELETE("/user/:id", c.DeleteUser)
-		api.PUT("/user/:id", c.UpdateUser)
-	}
-
-	repo := repository.NewRepository()
+	mongoClient := db.GetClient()
+	repo := repository.New(mongoClient)
 	// Constructing service
 	var service userservice.Service
 	{
-		service = srvc.NewService(repo)
+		service = srvc.New(repo)
 	}
 
-	fmt.Println("Inicialized service", service)
+	api := main.Router.Group("/api")
+	{
+		api.GET("/users", service.GetAllUsers)
+		api.GET("/user/:id", service.GetUser)
+		api.POST("/user", service.CreateUser)
+		api.DELETE("/user/:id", service.DeleteUser)
+		api.PUT("/user/:id", service.UpdateUser)
+	}
 
 	err := main.Router.Run(":3300")
 

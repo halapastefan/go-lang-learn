@@ -1,13 +1,11 @@
 package userservice
 
-import (
-	"github.com/halapastefan/microservice/userservice/model"
-)
+import "github.com/gin-gonic/gin"
 
 type Service interface {
-	GetAllUsers() []model.User
-	GetUser(id int) model.User
-	CreateUser(user model.User) model.User
-	DeleteUser(id int) model.User
-	UpdateUser(user model.User, id int) model.User
+	GetAllUsers(ctx *gin.Context)
+	GetUser(ctx *gin.Context)
+	CreateUser(ctx *gin.Context)
+	DeleteUser(ctx *gin.Context)
+	UpdateUser(ctx *gin.Context)
 }
