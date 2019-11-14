@@ -6,9 +6,9 @@ type User struct {
 }
 
 type Repository interface {
-	GetAllUsers() []*User
-	GetUser(id int) User
-	CreateUser(user User) User
-	DeleteUser(id int) User
+	GetAllUsers() ([]*User, error)
+	GetUser(id string) (User, error)
+	CreateUser(user *User) error
+	DeleteUser(id string) error
 	UpdateUser(user User, id int) User
 }

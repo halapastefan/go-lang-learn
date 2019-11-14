@@ -17,28 +17,33 @@ func New(repository userservice.Repository) userservice.Service {
 
 func (s *service) GetAllUsers(context *gin.Context) {
 
-	//usr1 := userservice.User{FirstName: "st", LastName: "te"}
-	//usr2 := userservice.User{FirstName: "st", LastName: "te"}
+	users, err := s.repo.GetAllUsers()
 
-	users := s.repo.GetAllUsers()
+	if err != nil {
+		context.Status(http.StatusNotFound)
+		return
+	}
 
 	log.Info("Users found")
 	context.JSON(http.StatusOK, users)
 }
 
-func (*service) GetUser(ctx *gin.Context) {
+func (s *service) GetUser(ctx *gin.Context) {
 
 	userId := ctx.Param("id")
-	usr := userservice.User{
-		LastName:  "Stefan",
-		FirstName: "Halapa",
+
+	usr, err := s.repo.GetUser(userId)
+
+	if err != nil {
+		ctx.Status(http.StatusNotFound)
+		return
 	}
 
 	log.Info("User with user id: ", userId, " found")
 	ctx.JSON(http.StatusOK, usr)
 }
 
-func (*service) CreateUser(ctx *gin.Context) {
+func (s *service) CreateUser(ctx *gin.Context) {
 
 	var user userservice.User
 
@@ -48,13 +53,25 @@ func (*service) CreateUser(ctx *gin.Context) {
 	}
 
 	log.Info(user)
+
+	err := s.repo.CreateUser(&user)
+
+	if err != nil {
+		ctx.Status(http.StatusInternalServerError)
+	}
+
 	ctx.JSON(http.StatusOK, user)
 }
 
-func (*service) DeleteUser(ctx *gin.Context) {
+func (s *service) DeleteUser(ctx *gin.Context) {
 
 	userId := ctx.Param("id")
 	log.Info("Try to delete user with id: ", userId)
+	err := s.repo.DeleteUser(userId)
+
+	if err != nil {
+		ctx.Status(http.StatusInternalServerError)
+	}
 
 	ctx.Status(http.StatusOK)
 }
