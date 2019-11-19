@@ -1,4 +1,4 @@
-module github.com/halapastefan/aws-lambda-example02
+module github.com/halapastefan/aws-lambda-example03
 
 go 1.13
 
