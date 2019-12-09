@@ -1,0 +1,6 @@
+sls deploy -v
+sls deploy function -f world
+sls invoke -f world -l
+ sls invoke -f world -l --data 'data'
+sls logs -f world -t
+sls remove
