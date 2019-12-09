@@ -26,6 +26,8 @@ provider:
   runtime: go1.x
   profile: serverless-admin
   region: us-east-2
+  memorySize: 128
+  timeout: 3
 
 # you can overwrite defaults here
 #  stage: dev
@@ -58,9 +60,14 @@ package:
     - ./bin/**
 
 functions:
-  world:
+  world-short:
     memorySize: 128 # optional, in MB, default is 1024
     handler: bin/world
+    timeout: 3
+  world-long:
+    memorySize: 128
+    handler: bin/world
+    timeout: 6
 #    events:
 #      - http:
 #          path: world
