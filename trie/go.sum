@@ -1,0 +1,15 @@
+github.com/beevik/prefixtree v0.0.0-20190221160703-0e2fef796dd6 h1:QPnONUruVXOnB5o3ktzpLJf1qBGf4vXbzlty1rQQmaY=
+github.com/beevik/prefixtree v0.0.0-20190221160703-0e2fef796dd6/go.mod h1:PxfjLBcuK500+WkUqGM9KN5gYsAmW0jpxfBpfqMVd8U=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/derekparker/trie v0.0.0-20190812220523-e66023ee76eb h1:HGjKnH6D1WD8sc9SfCkWkeD4OteWPPXD+ayJY+P1Bgk=
+github.com/derekparker/trie v0.0.0-20190812220523-e66023ee76eb/go.mod h1:D6ICZm05D9VN1n/8iOtBxLpXtoGp6HDFUJ1RNVieOSE=
+github.com/dghubble/trie v0.0.0-20190708005417-09498fbfbadb h1:Vg7QlQEvBgOvB+ReUTG0wnqM1VatG2ZOvPB1ZVB70HM=
+github.com/dghubble/trie v0.0.0-20190708005417-09498fbfbadb/go.mod h1:xNBeoT4V92/aNvuC3IJ2g59uxuKP4/kzvkpoHrb7v4A=
+github.com/konsorten/go-windows-terminal-sequences v1.0.1 h1:mweAR1A6xJ3oS2pRaGiHgQ4OO8tzTaLawm8vnODuwDk=
+github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
+github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/sirupsen/logrus v1.4.2 h1:SPIRibHv4MatM3XXNO2BJeFLZwZ2LvZgfQ5+UNI2im4=
+github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
+github.com/stretchr/objx v0.1.1/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
+github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
+golang.org/x/sys v0.0.0-20190422165155-953cdadca894/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
