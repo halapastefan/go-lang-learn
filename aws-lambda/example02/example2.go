@@ -5,7 +5,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-func HandlerFunc(c context.Context) (string, error)  {
+func HandlerFunc(c context.Context) (string, error) {
 	return "I am lambda", nil
 }
 

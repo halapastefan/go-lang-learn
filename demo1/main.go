@@ -11,7 +11,7 @@ func main() {
 
 	fmt.Println("Hi there", y)
 
-	cards := [] string {"a", "b", "c", newCard()}
+	cards := []string{"a", "b", "c", newCard()}
 
 	cards = append(cards, newCard())
 

@@ -20,7 +20,7 @@ func newDeck() deck {
 	cards := deck{}
 	for _, suit := range cardSuits {
 		for _, value := range cardValues {
-			cards = append(cards, value + " of " + suit)
+			cards = append(cards, value+" of "+suit)
 		}
 	}
 
@@ -68,4 +68,3 @@ func (d deck) shuffleDeck() {
 		d[i], d[newPosition] = d[newPosition], d[i]
 	}
 }
-
