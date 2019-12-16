@@ -24,61 +24,15 @@ type entry struct {
 	startDate time.Time
 }
 
-func createEntry(line []string) *entry  {
-	price := line[3]
-	initial, _ := strconv.Atoi(line[4])
-	increment, _ := strconv.Atoi(line[5])
-	start, dErr := time.Parse(timeFormat, line[6])
-	if dErr != nil {
-		fmt.Println(dErr)
-	}
-
-	return &entry{
-		price:     price,
-		initial:   initial,
-		increment: increment,
-		startDate: start,
-	}
-}
-func appendNode(t *trie.Trie, line []string){
-	node, found := t.Find(line[0])
-	if found {
-		v := node.Meta().(nodeValue)
-		v.value = append(v.value, *createEntry(line))
-		t.Add(line[0], v)
-	} else {
-		en := make([]entry, 0)
-		en = append(en, *createEntry(line))
-		nv := nodeValue{
-			value:en,
-		}
-		t.Add(line[0], nv)
-	}
-}
 func main() {
 
 	csvFile, err := os.Open("callingCodes.csv")
 
-	t := trie.New()
-
 	if err != nil {
 		log.Fatal(err)
 	}
-	reader := csv.NewReader(csvFile)
 	start := time.Now()
-	for {
-		line, err := reader.Read()
-		if err == io.EOF {
-			break
-		} else if err != nil {
-			log.Fatal(err)
-		}
-
-		if line[0]!="prefix" {
-			appendNode(t, line)
-		}
-
-	}
+	t := createTrie(csvFile)
 	elapsed := start.Sub(time.Now())
 	fmt.Printf("Trie inicialization %s\n", elapsed)
 
@@ -86,10 +40,8 @@ func main() {
 
 	i := 0
 	for {
-		r, _ := findPrefix("9378985320", t)
-		t, _ := time.Parse(timeFormat, "2019-12-04T00:00:00.00Z")
-		matchDate(*r, t)
-
+		res := findPrice(t, "939898123985", "2019-12-04T00:00:00.00Z")
+		fmt.Println(res)
 		i++
 		if i == 1 {
 			break
@@ -98,6 +50,12 @@ func main() {
 
 	elapsed = start.Sub(time.Now())
 	fmt.Printf("Prefix search took %s", elapsed)
+}
+
+func findPrice(t *trie.Trie, calling string, date string) entry {
+	r, _ := findPrefix(calling, t)
+	d, _ := time.Parse(timeFormat, date)
+	return matchDate(*r, d)
 }
 
 func findPrefix(nm string, trie *trie.Trie) (*nodeValue, bool) {
@@ -128,4 +86,60 @@ func matchDate(value nodeValue, date time.Time) entry {
 	})
 
 	return value.value[0]
+}
+
+//From csv line create entry that will go to the trie
+func createEntry(line []string) *entry  {
+	price := line[3]
+	initial, _ := strconv.Atoi(line[4])
+	increment, _ := strconv.Atoi(line[5])
+	start, dErr := time.Parse(timeFormat, line[6])
+	if dErr != nil {
+		fmt.Println(dErr)
+	}
+
+	return &entry{
+		price:     price,
+		initial:   initial,
+		increment: increment,
+		startDate: start,
+	}
+}
+
+//Meta data of node will be appended if node already exists
+func appendNode(t *trie.Trie, line []string){
+	node, found := t.Find(line[0])
+	if found {
+		v := node.Meta().(nodeValue)
+		v.value = append(v.value, *createEntry(line))
+		t.Add(line[0], v)
+	} else {
+		en := make([]entry, 0)
+		en = append(en, *createEntry(line))
+		nv := nodeValue{
+			value:en,
+		}
+		t.Add(line[0], nv)
+	}
+}
+
+func createTrie(file *os.File) *trie.Trie {
+	t := trie.New()
+
+	reader := csv.NewReader(file)
+	for {
+		line, err := reader.Read()
+		if err == io.EOF {
+			break
+		} else if err != nil {
+			log.Fatal(err)
+		}
+
+		if line[0]!="prefix" {
+			appendNode(t, line)
+		}
+
+	}
+
+	return t
 }
