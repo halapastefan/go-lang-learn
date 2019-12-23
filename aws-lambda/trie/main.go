@@ -15,17 +15,9 @@ import (
 	"os"
 )
 var timeFormat = "2006-01-02T15:04:05.00Z"
-var t *trie.Trie
+var csvFile, _ = os.Open("callingCodes.csv")
+var t = CreateTrie(csvFile)
 
-func init()  {
-	csvFile, err := os.Open("callingCodes.csv")
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	CreateTrie(csvFile)
-}
 type nodeValue struct {
 	value []entry
 }
@@ -37,14 +29,14 @@ type entry struct {
 }
 
 func find(req events.APIGatewayProxyRequest)(events.APIGatewayProxyResponse, error) {
+
 	calling := req.QueryStringParameters["calling"]
 	date := req.QueryStringParameters["date"]
-	findPrice(t, calling, date)
+	res := findPrice(t, calling, date)
 
-	return events.APIGatewayProxyResponse{StatusCode:200}, nil
+	return events.APIGatewayProxyResponse{StatusCode:200, Body:res.price}, nil
 }
 func main() {
-
 	lambda.Start(find)
 }
 func findPrice(t *trie.Trie, calling string, date string) entry {

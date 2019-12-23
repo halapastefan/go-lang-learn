@@ -12,7 +12,7 @@ import (
 
 
 func main() {
-
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
 	csvFile, err := os.Open("callingCodes.csv")
