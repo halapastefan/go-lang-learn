@@ -6,7 +6,7 @@ import (
 
 func main() {
 
-	cards := newDeck()
+	cards := NewDeck()
 	cards.saveToFile("cards.txt")
 
 	hand, remainingDeck := deal(cards, 5)
@@ -22,7 +22,7 @@ func main() {
 		fmt.Println(err)
 	}
 
-	deck := newDeckFromFile("cards.txt")
+	deck := NewDeckFromFile("cards.txt")
 	fmt.Println(deck.toString())
 
 	deck.shuffleDeck()

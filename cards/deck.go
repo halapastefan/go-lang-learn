@@ -11,9 +11,9 @@ import "strings"
 
 // Create new type of deck which is a slice of strings
 
-type deck []string
+type Deck []string
 
-func newDeck() deck {
+func NewDeck() Deck {
 	cardSuits := []string{"Spades", "Hearts", "Diamonds", "Cubes"}
 	cardValues := []string{"Ace", "Two", "Three", "Four"}
 
