@@ -28,4 +28,6 @@ func main() {
 	deck.shuffleDeck()
 	deck.print()
 
+	fmt.Println("Nesto")
+
 }
